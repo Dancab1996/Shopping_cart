@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Category: {{categoryName}}</title>
+<link rel="stylesheet" href="../static/css/cart.css" />
+	<link rel="stylesheet" href="../static/css/topStyle.css" />
+</head>
+<body>
+<div id="title">
+	<a href="/">
+		<img id="logo" src="../static/images/logo.png"/>
+	</a>
+	<div class="dropdown">
+		<button class="dropbtn">Hello <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Your orders</a>
+		</div>
+	</div>
+	<div id="kart">
+		<a class="link" href="/cart">
+			<img src="../static/images/shoppingCart.png" id="cartIcon" />
+			CART
+		</a>
+	</div>
+</div>
+
+<div>
+	<h2>Showing all products of Category {{categoryName}}:</h2>
+	{% for itemData in data %}
+	<table>
+		<tr id="productName">
+			{% for row in itemData %}
+			<td>
+				{{row[1]}}
+			</td>
+			{% endfor %}
+		</tr>
+		<tr id="productImage">
+			{% for row in itemData %}
+			<td>
+				<a href="/productDescription?productId={{row[0]}}">
+					<img src={{ url_for('static', filename='uploads/' + row[3]) }} id="itemImage" style="width: 165px; height: 125px;" />
+				</a>
+			</td>
+			{% endfor %}
+		</tr>
+		<tr id="productPrice">
+			{% for row in itemData %}
+			<td>
+				${{row[2]}}
+			</td>
+			{% endfor %}
+		</tr>
+	</table>
+	{% endfor %}
+</div>
+</body>
+</html>
